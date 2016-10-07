@@ -1,0 +1,49 @@
+{
+  "variables": {
+    "aws_access_key": "AKIAI6WLFAA5IMID6MAA",
+    "aws_secret_key": "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",
+    "security_group_id": "sg-babf16c3",
+    "vpc_id": "vpc-4ca6b628",
+    "instance_type": "t2.medium",
+    "region": "us-west-2",
+    "source_ami": "ami-2a34e94a"   
+  },
+
+  "builders": [{
+  "access_key": "{{user `aws_access_key`}}",
+  "secret_key": "{{user `aws_secret_key`}}",
+  "instance_type": "{{user `instance_type`}}",
+  "region": "{{user `region`}}",
+  "security_group_id": "{{user `security_group_id`}}",
+  "source_ami": "{{user `source_ami`}}",
+  "type": "amazon-ebs",
+  "ssh_username": "admin",
+  "ami_name": "debian2kali-{{timestamp}}",
+  "ami_block_device_mappings": [{
+          "volume_size": 20,
+          "volume_type": "gp2",
+          "device_name": "/dev/xvda",
+	  "delete_on_termination": "true"
+	  }],
+  "launch_block_device_mappings": [{
+          "volume_size": 20,
+          "volume_type": "gp2",
+          "device_name": "/dev/xvda",
+	  "delete_on_termination": "true"          
+	  }],
+    "vpc_id": "vpc-4ca6b628",
+	"ami_virtualization_type": "hvm",
+    "associate_public_ip_address": true
+  }],
+  
+  "provisioners": [{
+      "type": "shell",
+      "pause_before": "10s",
+      "execute_command": "echo 'admin'|sudo -S bash '{{.Path}}'",
+      "scripts": [
+        "scripts/base.sh",
+        "scripts/grub.sh",
+        "scripts/cleanup.sh"
+      ]
+    }]
+}
