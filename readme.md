@@ -183,8 +183,8 @@ Download Packer and add it to your path
     packer validate templates/example.json
 
     packer build \
-    -var 'aws_access_key=AKIAI6WLFAA5IMID6MAA' \
-    -var 'aws_secret_key=6dQm1RmrtiefJqIy9td6ZgJWAw16C1C2hgmYeeGA'  \
+    -var 'aws_access_key=FILL THE VALUES' \
+    -var 'aws_secret_key=FILL THE VALUES'  \
     templates/example.json 
 
 
@@ -295,7 +295,6 @@ azure vm quick-create \
 
 ![](docs/images/Selection_085.png)
 ![](docs/images/Selection_086.png)
-![](docs/images/Selection_088.png)
 
 
 ### Fin
